@@ -16,9 +16,9 @@ node{
     }
    
    stage('Email Notification'){
-      mail bcc: '', body: '''Hi Welcome to jenkins email alerts
+      mail bcc: '', body: '''$BUILD_URL
       Thanks
-      Hari''', cc: '', from: '', replyTo: '', subject: 'Jenkins Job', to: 'sivaece496@gmail.com'
+      Siva''', cc: '', from: '', replyTo: '', subject: 'Jenkins Job', to: 'sivaece496@gmail.com'
    }
   // stage('Slack Notification'){
     //   slackSend baseUrl: 'https://hooks.slack.com/services/',
@@ -28,14 +28,5 @@ node{
       // teamDomain: 'javahomecloud',
       // tokenCredentialId: 'slack-demo'
    //}
- post {
-        always {
-            echo 'I will always say Hello again!'
-            
-            emailext body: "${currentBuild.currentResult}: Job ${env.JOB_NAME} build ${env.BUILD_NUMBER}\n More info at: ${env.BUILD_URL}",
-                recipientProviders: [[$class: 'DevelopersRecipientProvider'], [$class: 'RequesterRecipientProvider']],
-                subject: "Jenkins Build ${currentBuild.currentResult}: Job ${env.JOB_NAME}"
-            
-        }
-    }
+
 }
