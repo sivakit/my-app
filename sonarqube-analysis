@@ -29,13 +29,21 @@ node{
       // tokenCredentialId: 'slack-demo'
    //}
    
-     emailext (
-     to: "sivaece496@gmail.com," + recipients,
-      subject: "STARTED: Job '${env.JOB_NAME} [${env.BUILD_NUMBER}]'",
-      body: """<p>STARTED: Job '${env.JOB_NAME} [${env.BUILD_NUMBER}]':</p>
-        <p>Check console output at "<a href="${env.BUILD_URL}">${env.JOB_NAME} [${env.BUILD_NUMBER}]</a>"</p>""",
-      recipientProviders: [[$class: 'DevelopersRecipientProvider']]
+ //    emailext (
+   //  to: "sivaece496@gmail.com," + recipients,
+  //    subject: "STARTED: Job '${env.JOB_NAME} [${env.BUILD_NUMBER}]'",
+   //   body: """<p>STARTED: Job '${env.JOB_NAME} [${env.BUILD_NUMBER}]':</p>
+  //      <p>Check console output at "<a href="${env.BUILD_URL}">${env.JOB_NAME} [${env.BUILD_NUMBER}]</a>"</p>""",
+    //  recipientProviders: [[$class: 'DevelopersRecipientProvider']]
     )
+    stage('Send email0') {
+    emailext (body: '${DEFAULT_CONTENT}',
+       recipientProviders: [[$class: 'CulpritsRecipientProvider']],
+       subject: '${DEFAULT_SUBJECT}',
+       to: 'sivaece496@gmail.com')
+    
+    }
+       
     
     stage('Send email') {
     def mailRecipients = "sivaece496@gmail.com"
